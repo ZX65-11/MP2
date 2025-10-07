@@ -1,0 +1,67 @@
+.gallery-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 20px;
+}
+
+.filter-controls {
+margin-bottom: 30px;
+max-width: 1200px;
+}
+
+.artist-buttons {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 8px;
+}
+
+.filter-button {
+background-color: #efeded;
+border: 1px solid #cac9c9;
+border-radius: 20px;
+padding: 6px 12px;
+transition: all 0.2s ease;
+font-size: 0.9rem;
+}
+
+.filter-button.active {
+background-color: red; 
+color: white;
+}
+
+.image {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+gap: 20px;
+width: 100%;
+max-width: 1200px;
+}
+
+.items {
+display: flex;
+flex-direction: column;
+text-align: center;
+color: black;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+transition: transform 0.2s ease;
+}
+
+.items:hover {
+transform: translateY(-5px);
+}
+
+.items img {
+width: 100%;
+height: 200px;  
+object-fit: cover;
+}
+
+.artwork-title {
+margin: 10px 5px;
+font-weight: bold;
+color: black;
+}
