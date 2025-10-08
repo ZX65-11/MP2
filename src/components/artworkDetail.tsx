@@ -62,6 +62,7 @@ const ArtworkDetail: React.FC<ArtworkProps> = ({ artworkList }) => {
         <img 
           src={getImageUrl(details.image_id)} 
           className="artwork-image" 
+          alt={ details.title}
         />
         <div className="info">
           <p><strong>Artist:</strong> {details.artist_title || 'Unknown'}</p>
