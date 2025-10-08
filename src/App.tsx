@@ -4,14 +4,14 @@ import axios from 'axios';
 import './App.css';
 import ArtworkList from './components/artworkList';
 import ArtworkGallery from './components/artworkGallery';
-/*import ArtworkDetail from './components/artworkDetail';
- */
+import ArtworkDetail from './components/artworkDetail';
+
 
 export interface Artwork {
   id: number;
   title: string;
   artist: string | null;
-  image_id: string | null;
+  image_id: string ;
 }
 
 const App: React.FC = () =>  {
@@ -19,8 +19,24 @@ const App: React.FC = () =>  {
 
   useEffect (() => {
     const fetchApi = async() => {
-      const response = await axios.get('https://api.artic.edu/api/v1/artworks?fields=id,title,artist_title,image_id&limit=100&include=place_pivots')
-      const ArtworkData = response.data.data.map((artwork: any) => {
+      // some of them don't have image,query image_id exist
+      const query = {
+        "query": {
+          "exists": {
+            "field": "image_id"
+          }
+        },
+        "fields": [
+          "id",
+          "title",
+          "artist_title",
+          "image_id"
+        ],
+        "limit": 100
+      };
+      const response = await axios.post('https://api.artic.edu/api/v1/artworks/search', query);
+      const artworkFilterImage = response.data.data.filter((artwork: any) => artwork.image_id !== null);
+      const ArtworkData = artworkFilterImage.map((artwork: any) => {
           return {
             id: artwork.id,
             title: artwork.title,
@@ -45,6 +61,7 @@ const App: React.FC = () =>  {
         <Routes>
           <Route path="/" element={<ArtworkList artworkList={artworkList} />} />
           <Route path="/gallery" element={<ArtworkGallery artworkList={artworkList} />} />
+          <Route path="/artwork/:id" element={<ArtworkDetail artworkList={artworkList} />} />
         </Routes>
       </div>
     </Router>

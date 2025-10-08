@@ -24,7 +24,6 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworkList }) => {
     return Array.from(artists).sort();
   }, [artworkList]);
 
-  // 根据选择的艺术家筛选艺术品
   const filteredArtwork = useMemo(() => {
     if (selectedArtists.length === 0) {
       return artworkList;
@@ -35,7 +34,6 @@ const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworkList }) => {
     );
   }, [artworkList, selectedArtists]);
 
-  // 切换筛选艺术家
   const handleArtistToggle = (artist: string) => {
     setSelectedArtists(prevArtists => {
       if (prevArtists.includes(artist)) {
